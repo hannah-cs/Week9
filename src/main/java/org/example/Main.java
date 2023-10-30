@@ -17,5 +17,19 @@ public class Main {
         }
 
         System.out.println(employeeMap);
+
+        //CRUD operations:
+        Employee newEmployee = new Employee("Liz", 004, "Customer Support", "Support rep", 567);
+        //create
+        employeeMap.put(004, newEmployee);
+        System.out.println(employeeMap);
+        //retrieve
+        System.out.println(employeeMap.get(004));
+        //update
+        newEmployee.setName("Elizabeth");
+        System.out.println(employeeMap);
+        //delete
+        employeeMap.remove(004);
+        System.out.println(employeeMap);
     }
 }
