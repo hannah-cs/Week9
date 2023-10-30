@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
+import java.util.Map;
 
 public class Main {
 
@@ -38,6 +40,9 @@ public class Main {
 
         // Search by department
         searchDept("Finance", employees);
+
+        //dept report
+        departmentReport(employees);
     }
 
     public static void searchDept(String searchTerm, HashSet<Employee> employees) {
@@ -49,4 +54,17 @@ public class Main {
         }
         System.out.println("Results: " + searchResults);
     }
+
+    public static void departmentReport(Set<Employee> employees) {
+        Map<String, Integer> deptCount = new HashMap<>();
+        for (Employee e : employees) {
+            String dept = e.getDepartment();
+            deptCount.put(dept, deptCount.getOrDefault(dept, 0) + 1);
+        }
+        System.out.println("Employees per Department:");
+        for (Map.Entry<String, Integer> entry : deptCount.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+
 }
