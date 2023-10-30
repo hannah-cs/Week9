@@ -1,6 +1,9 @@
 package org.example;
+
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.HashMap;
+import java.util.List;
 
 public class Main {
 
@@ -18,18 +21,32 @@ public class Main {
 
         System.out.println(employeeMap);
 
-        //CRUD operations:
-        Employee newEmployee = new Employee("Liz", 004, "Customer Support", "Support rep", 567);
-        //create
+        // CRUD operations:
+        Employee newEmployee = new Employee("Liz", 004, "Finance", "CTO", 567);
+        employees.add(newEmployee);
+        // Create
         employeeMap.put(004, newEmployee);
         System.out.println(employeeMap);
-        //retrieve
+        // Retrieve
         System.out.println(employeeMap.get(004));
-        //update
+        // Update
         newEmployee.setName("Elizabeth");
         System.out.println(employeeMap);
-        //delete
+        // Delete
         employeeMap.remove(004);
         System.out.println(employeeMap);
+
+        // Search by department
+        searchDept("Finance", employees);
+    }
+
+    public static void searchDept(String searchTerm, HashSet<Employee> employees) {
+        List<Employee> searchResults = new ArrayList<>();
+        for (Employee e : employees) {
+            if (e.getDepartment().contains(searchTerm)) {
+                searchResults.add(e);
+            }
+        }
+        System.out.println("Results: " + searchResults);
     }
 }

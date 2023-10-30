@@ -1,6 +1,8 @@
 package org.example;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 public class Employee {
     private String name;
@@ -65,27 +67,5 @@ public class Employee {
     @Override
     public String toString(){
         return "Employee "+id+": "+name+" - "+jobTitle+" in "+department+" department. Reports to "+managerId;
-    }
-
-    public void search(HashSet<Employee> employees, String searchTerm){
-        HashSet<Employee> searchResults = new HashSet<>();
-        for (Employee e : employees){
-            if (e.getName().contains(searchTerm)){
-                searchResults.add(e);
-            }
-            if (e.getId() == Integer.parseInt(searchTerm)){
-                searchResults.add(e);
-            }
-            if (e.getDepartment().contains(searchTerm)){
-                searchResults.add(e);
-            }
-            if (e.getJobTitle().contains(searchTerm)){
-                searchResults.add(e);
-            }
-            if (e.getManagerId() == Integer.parseInt(searchTerm)){
-                searchResults.add(e);
-            }
-        }
-        System.out.println("Search results: "+searchResults);
     }
 }
