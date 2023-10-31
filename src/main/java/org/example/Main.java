@@ -11,9 +11,9 @@ public class Main {
 
     public static void main(String[] args) {
         HashSet<Employee> employees = new HashSet<>();
-        employees.add(new Employee("Ann", 001, "Finance", "Accountant", 123));
-        employees.add(new Employee("Bob", 002, "HR", "Recruiter", 234));
-        employees.add(new Employee("Sam", 003, "Sales", "Sales rep", 345));
+        employees.add(new Employee("Ann", 001, "Finance", "Accountant", 004, "2018-10-03", 75000));
+        employees.add(new Employee("Bob", 002, "HR", "Recruiter", 432, "2020-04-06", 60000));
+        employees.add(new Employee("Sam", 003, "Sales", "Sales rep", 328, "2023-08-04", 45000));
         System.out.println(employees);
 
         HashMap<Integer, Employee> employeeMap = new HashMap<>();
@@ -24,7 +24,7 @@ public class Main {
         System.out.println(employeeMap);
 
         // CRUD operations:
-        Employee newEmployee = new Employee("Liz", 004, "Finance", "CTO", 567);
+        Employee newEmployee = new Employee("Liz", 004, "Finance", "CTO", 1, "2017-05-03", 100000);
         employees.add(newEmployee);
         // Create
         employeeMap.put(004, newEmployee);
@@ -43,6 +43,23 @@ public class Main {
 
         //dept report
         departmentReport(employees);
+
+        // organisational tree
+        EmployeeNode ceo = new EmployeeNode(new Employee("Marie", 1, "Leadership", "CEO", 1, "2015-07-01", 400000));
+        EmployeeNode manager1 = new EmployeeNode(new Employee("Liz", 4, "Finance", "CTO", 1, "2017-05-03", 100000));
+        EmployeeNode manager2 = new EmployeeNode(new Employee("Tom", 432, "HR", "Head of HR", 1,  "2022-09-08", 90000));
+        EmployeeNode manager3 = new EmployeeNode(new Employee("Frank", 328, "Sales", "Sales Director", 1, "2016-03-14", 150000));
+        EmployeeNode employee001 = new EmployeeNode(employeeMap.get(1));
+        EmployeeNode employee002 = new EmployeeNode(employeeMap.get(2));
+        EmployeeNode employee003 = new EmployeeNode(employeeMap.get(3));
+
+        // Build the organization hierarchy
+        ceo.addSubordinate(manager1);
+        ceo.addSubordinate(manager2);
+        ceo.addSubordinate(manager3);
+        manager1.addSubordinate(employee001);
+        manager2.addSubordinate(employee002);
+        manager3.addSubordinate(employee003);
     }
 
     public static void searchDept(String searchTerm, HashSet<Employee> employees) {
