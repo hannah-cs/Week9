@@ -8,6 +8,38 @@ import java.util.Set;
 import java.util.Map;
 
 public class Main {
+    public enum ReportType {
+        EMPLOYEE("Employee report"), DEPARTMENT("Department report"), HIERARCHY("Hierarchy report");
+        private final String displayName;
+        ReportType(String displayName){
+            this.displayName = displayName;
+        }
+        public String getDisplayName(){
+            return displayName;
+        }
+    }
+
+    public static void searchDept(String searchTerm, HashSet<Employee> employees) {
+        List<Employee> searchResults = new ArrayList<>();
+        for (Employee e : employees) {
+            if (e.getDepartment().contains(searchTerm)) {
+                searchResults.add(e);
+            }
+        }
+        System.out.println("Results: " + searchResults);
+    }
+
+    public static void departmentReport(Set<Employee> employees) {
+        Map<String, Integer> deptCount = new HashMap<>();
+        for (Employee e : employees) {
+            String dept = e.getDepartment();
+            deptCount.put(dept, deptCount.getOrDefault(dept, 0) + 1);
+        }
+        System.out.println("Employees per Department:");
+        for (Map.Entry<String, Integer> entry : deptCount.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
 
     public static void main(String[] args) {
         HashSet<Employee> employees = new HashSet<>();
@@ -60,28 +92,6 @@ public class Main {
         manager1.addSubordinate(employee001);
         manager2.addSubordinate(employee002);
         manager3.addSubordinate(employee003);
-    }
-
-    public static void searchDept(String searchTerm, HashSet<Employee> employees) {
-        List<Employee> searchResults = new ArrayList<>();
-        for (Employee e : employees) {
-            if (e.getDepartment().contains(searchTerm)) {
-                searchResults.add(e);
-            }
-        }
-        System.out.println("Results: " + searchResults);
-    }
-
-    public static void departmentReport(Set<Employee> employees) {
-        Map<String, Integer> deptCount = new HashMap<>();
-        for (Employee e : employees) {
-            String dept = e.getDepartment();
-            deptCount.put(dept, deptCount.getOrDefault(dept, 0) + 1);
-        }
-        System.out.println("Employees per Department:");
-        for (Map.Entry<String, Integer> entry : deptCount.entrySet()) {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
-        }
     }
 
 }
